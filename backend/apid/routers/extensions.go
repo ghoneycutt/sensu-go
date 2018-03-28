@@ -16,7 +16,7 @@ type ExtensionsRouter struct {
 }
 
 // NewExtensionRouter instantiates new router for controlling extension resources
-func NewExtensionRouter(store store.ExtensionRegistry) *ExtensionsRouter {
+func NewExtensionsRouter(store store.ExtensionRegistry) *ExtensionsRouter {
 	return &ExtensionsRouter{
 		controller: actions.NewExtensionController(store),
 	}
