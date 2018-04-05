@@ -41,9 +41,9 @@ sensuapp/sensu-go:2.0.0-alpha sensu-backend start
 2. Start the Sensu 2.0 Agent process
 
 ```
-$ docker run -d --name sensu-agent \
+$ docker run -d --name sensu-agent --link sensu-backend \
 sensuapp/sensu-go:2.0.0-alpha sensu-agent start \
---backend-url ws://127.0.0.1:8081 \
+--backend-url ws://sensu-backend:8081 \
 --subscriptions workstation,docker
 ```
 
