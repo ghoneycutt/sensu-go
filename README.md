@@ -64,8 +64,8 @@ $ sudo mv sensuctl /usr/local/bin/
 On Debian/Ubuntu Linux
 
 ```
-$ curl -s
-https://packagecloud.io/install/repositories/sensu/nightly/script.deb.sh
+$ curl -s \
+https://packagecloud.io/install/repositories/sensu/nightly/script.deb.sh \
 | sudo bash
 
 $ sudo apt-get install sensu-cli
@@ -74,8 +74,8 @@ $ sudo apt-get install sensu-cli
 On RHEL/CentOS Linux
 
 ```
-$ curl -s
-https://packagecloud.io/install/repositories/sensu/nightly/script.rpm.sh
+$ curl -s \
+https://packagecloud.io/install/repositories/sensu/nightly/script.rpm.sh \
 | sudo bash
 
 $ sudo yum install sensu-cli
@@ -99,9 +99,12 @@ $ sensuctl configure
 $ sensuctl entity list
 ```
 
-Congratulations! You have a local Sensu 2.0 deployment!
+Congratulations! You now have a local Sensu 2.0 deployment!
 
-## Contributing/Development
+To learn more about Sensu 2.0 and what you can do with it, please
+check out the [official project documentation](https://docs.sensu.io/sensu-core/2.0/).
+
+## Contributing
 
 To make a good faith effort to ensure the criteria of the MIT License
 are met, Sensu Inc. requires the Developer Certificate of Origin (DCO)
@@ -110,9 +113,11 @@ process to be followed.
 For guidelines on how to contribute to this project and more
 information on the DCO, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Protobuf
+## Development
 
-### Overview
+### Protobuf
+
+#### Overview
 
 We are using the version **proto3** of the protocol buffers language. Here are some useful resources:
 
@@ -120,8 +125,7 @@ We are using the version **proto3** of the protocol buffers language. Here are s
 
 [The proto3 language guide](https://developers.google.com/protocol-buffers/docs/proto3)
 
-
-### Installation
+#### Installation
 
 Install the protobuf compiler since we don't use the one that golang uses.
 ```
@@ -129,16 +133,16 @@ brew install protobuf
 ```
 Otherwise, see the **for non-C++ users** [instructions here.](https://github.com/google/protobuf#protocol-compiler-installation)
 
-### Quick Start
+#### Quick Start
 
 Once you make a change to any `*.proto` file within the **types** package, you will need to regenerate the associated `*.pb.go` file. To do so, simply run `go generate` on the package.
 
-## Dependencies
+### Dependencies
 
 Sensu uses [golang/dep](https://github.com/golang/dep) for managing its
 dependencies.
 
-### Usage
+#### Usage
 
 Running the following will install `dep` (if it is not already) and pull all
 required dependencies.
@@ -166,7 +170,7 @@ then run:
 dep prune
 ```
 
-### Further Reading
+#### Further Reading
 
 - [The Saga of Go Dependency Management](https://blog.gopheracademy.com/advent-2016/saga-go-dependency-management/)
 - [`dep` Usage](https://github.com/golang/dep#usage)
@@ -243,11 +247,11 @@ Run end-to-end tests:
 ```shell
 ./build.sh e2e
 
-# To run a specific test:
+To run a specific test:
 
 ./build.sh e2e -run TestRBAC
 
-# To prevent tests from running in parallel:
+To prevent tests from running in parallel:
 
 ./build.sh e2e -parallel 1
 ```
