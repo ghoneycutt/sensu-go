@@ -52,8 +52,9 @@ sensuapp/sensu-go:2.0.0-alpha sensu-agent start \
 On macOS
 
 ```
-$ curl -LO https://storage.googleapis.com/sensu-binaries/$(curl -s
-https://storage.googleapis.com/sensu-binaries/latest.txt)/darwin/amd64/sensuctl
+$ latest=$(curl -s https://storage.googleapis.com/sensu-binaries/latest.txt)
+
+$ curl -LO https://storage.googleapis.com/sensu-binaries/$latest/darwin/amd64/sensuctl
 
 $ chmod +x sensuctl
 
