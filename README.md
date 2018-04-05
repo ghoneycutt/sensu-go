@@ -2,6 +2,104 @@
 
 [![Build Status](https://travis-ci.org/sensu/sensu-go.svg?branch=master)](https://travis-ci.org/sensu/sensu-go)
 
+Sensu is an open source monitoring tool for ephemeral infrastructure
+and distributed applications. It is an agent based monitoring system
+with built-in auto-discovery, making it very well-suited for cloud
+environments. Sensu uses service checks to monitor service health and
+collect telemetry data. It also has a number of well defined APIs for
+configuration, external data input, and to provide access to Sensu's
+data. Sensu is extremely extensible and is commonly referred to as
+"the monitoring router".
+
+## What is Sensu 2.0?
+
+Sensu 2.0 is a complete rewrite of Sensu in Go, with new capabilities
+and reduced operational overhead. It eliminates several sources of
+friction for new and experienced Sensu users.
+
+## Installation
+
+Sensu 2.0 installer packages are available for a number of computing
+platforms (e.g. Debian/Ubuntu, RHEL/Centos, etc), but the easiest way
+to get started is with the official Docker image, sensuapp/sensu.
+
+Please note the following installation steps to get Sensu up and
+running on your local workstation with Docker.
+
+_NOTE: the following instructions are based on Docker Community
+Edition (CE), though they may be easily adapted for other container
+platforms. Please download and install Docker CE before proceeding._
+
+1. Start the Sensu 2.0 Backend process
+
+```
+$ docker run -d --name sensu-backend \
+-p 2380:2380 -p 3000:3000 -p 8080:8080 -p 8081:8081 \
+sensuapp/sensu-go:2.0.0-alpha sensu-backend start
+```
+
+2. Start the Sensu 2.0 Agent process
+
+```
+$ docker run -d --name sensu-agent \
+sensuapp/sensu-go:2.0.0-alpha sensu-agent start \
+--backend-url ws://127.0.0.1:8081 \
+--subscriptions workstation,docker
+```
+
+3. Download and install the Sensu 2.0 CLI tool
+
+On macOS
+
+```
+$ curl -LO https://storage.googleapis.com/sensu-binaries/$(curl -s
+https://storage.googleapis.com/sensu-binaries/latest.txt)/darwin/amd64/sensuctl
+
+$ chmod +x sensuctl
+
+$ sudo mv sensuctl /usr/local/bin/
+```
+
+On Debian/Ubuntu Linux
+
+```
+$ curl -s
+https://packagecloud.io/install/repositories/sensu/nightly/script.deb.sh
+| sudo bash
+
+$ sudo apt-get install sensu-cli
+```
+
+On RHEL/CentOS Linux
+
+```
+$ curl -s
+https://packagecloud.io/install/repositories/sensu/nightly/script.rpm.sh
+| sudo bash
+
+$ sudo yum install sensu-cli
+```
+
+4. Configure the Sensu 2.0 CLI tool
+
+```
+$ sensuctl configure
+? Sensu Backend URL: http://127.0.0.1:8080
+? Username: admin
+? Password: P@ssw0rd!
+? Organization: default
+? Environment: default
+? Preferred output format: tabular
+```
+
+5. List Sensu 2.0 Entities
+
+```
+$ sensuctl entity list
+```
+
+Congratulations! You have a local Sensu 2.0 deployment!
+
 ## Contributing/Development
 
 To make a good faith effort to ensure the criteria of the MIT License
